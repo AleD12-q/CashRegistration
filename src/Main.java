@@ -11,14 +11,14 @@ public class Main {
 
         for(int i = 0; i < 500; i++){
             Random random = new Random();
-            int min = 3, max = 9;
-            int length = random.nextInt(max - min + 1) + min;
+            int minName = 3, maxName = 9;
+            int length = random.nextInt(maxName - minName + 1) + minName;
             StringBuilder sb = new StringBuilder();
             for(int j = 0; j < length; j++) {
                 sb.append(regex.charAt(random.nextInt(regex.length())));
             }
-            int min1 = 8, max1 = 999;
-            int random_price = random.nextInt(max1 - min1 + 1) + min1;
+            int minPrice = 8, maxPrice = 999;
+            int random_price = random.nextInt(maxPrice - minPrice + 1) + minPrice;
             int random_markdown = random.nextInt(28) + 3;
             if(random_price > 200) {
                 random_price = random_price/random_markdown;
@@ -26,13 +26,15 @@ public class Main {
             if(random_price < 10)count1++;
             else if (random_price < 100) count10++;
             else count100++;
+            int minCount = 2, maxCount = 100;
+            int random_count = random.nextInt(maxCount - minCount + 1) + minCount;
 
-            productRepository.add(i+100000, random_price, sb.toString(), 99);
+            productRepository.add(i+100000, random_price, sb.toString(), random_count);
         }
 
         System.out.println("<10 = " + count1 + "\n>=10и<100 = " + count10 + "\n>=100 = " + count100 + "\n");
         CashCalc cashCalc = new CashCalc(productRepository);
         //System.out.println(productRepository);
-        System.out.println(cashCalc.product_selection(3342));
+        System.out.println(cashCalc.product_selection(1523321));
     }
 }

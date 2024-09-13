@@ -18,33 +18,6 @@ public class CashCalc {
         this.productRepository = productRepository;
     }
 
-    /*
-    public String product_selection(float count_money){
-        if(basketRepository.getBaskets().containsKey((int)count_money)){
-            return toString((int)count_money);
-        }
-        Basket new_basket = new Basket();
-
-        for (int j = productRepository.getAll_product().size()-1; j >= 0; j--) {
-            List<Product> products = new ArrayList<>();
-            products.add(productRepository.getAll_product().get(j));
-            float sum_price = productRepository.getAll_product().get(j).getPrice();
-            for (int i = productRepository.getAll_product().size() - 1; i >= 0; i--) {
-                if ((int) productRepository.getAll_product().get(i).getPrice() <= (int) (count_money - sum_price)) {
-                    sum_price += productRepository.getAll_product().get(i).getPrice();
-                    products.add(productRepository.getAll_product().get(i));
-                }
-            }
-            if(sum_price == count_money){
-                new_basket.setCurrentProducts(products);
-                new_basket.setCountMoney((int)count_money);
-                break;
-            }
-        }
-        basketRepository.add(new_basket, (int)count_money);
-        return toString((int)count_money);
-    }
-    */
     public List<Product> sort(List<Product> unSortedList){
         unSortedList.sort(Comparator.comparingInt(Product::getPrice));
         return unSortedList;
@@ -74,7 +47,7 @@ public class CashCalc {
                     SelectProduct temp = findProduct(tempTotalPrice, productRepository.getAll_product().get(i));
                     basket.add(temp);
                     tempTotalPrice -= temp.getCount() * temp.getProduct().getPrice();
-                    break;
+                    if(tempTotalPrice == 0) break;
                 }
             }
             if(basket.getCountMoney() != totalPrice){
@@ -88,8 +61,12 @@ public class CashCalc {
         int count = 0;
         int basketPrice = 0;
         while (basketPrice < tempPrice){
-            basketPrice += product.getPrice();
-            count++;
+            if(count < product.getCount()) {
+                basketPrice += product.getPrice();
+                count++;
+            }else{
+                break;
+            }
         }
         return new SelectProduct(product, count);
     }

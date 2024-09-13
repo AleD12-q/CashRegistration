@@ -47,7 +47,10 @@ public class ProductRepository {
         StringBuilder sb = new StringBuilder();
         for(Product product:all_product){
             sb.append("ID - ").append(product.getId()).append('\n');
-            sb.append("Name - ").append(product.getName()).append("\n").append("Price - ").append(product.getPrice()).append("\n===================\n");
+            sb.append("Name - ").append(product.getName()).append("\n")
+                    .append("Price - ").append(product.getPrice()).append('\n')
+                    .append("Count - ").append(product.getCount())
+                    .append("\n===================\n");
         }
         return sb.toString();
     }
