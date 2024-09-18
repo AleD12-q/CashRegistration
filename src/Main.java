@@ -35,6 +35,6 @@ public class Main {
         System.out.println("<10 = " + count1 + "\n>=10и<100 = " + count10 + "\n>=100 = " + count100 + "\n");
         CashCalc cashCalc = new CashCalc(productRepository);
         //System.out.println(productRepository);
-        System.out.println(cashCalc.product_selection(1523321));
+        System.out.println(cashCalc.product_selection(228));
     }
 }

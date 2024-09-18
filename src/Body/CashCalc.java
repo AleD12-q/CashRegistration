@@ -46,6 +46,7 @@ public class CashCalc {
                 if (tempTotalPrice % productRepository.getAll_product().get(i).getPrice() == 0) {
                     SelectProduct temp = findProduct(tempTotalPrice, productRepository.getAll_product().get(i));
                     basket.add(temp);
+                    temp.getProduct().setCount(temp.getProduct().getCount()-temp.getCount());
                     tempTotalPrice -= temp.getCount() * temp.getProduct().getPrice();
                     if(tempTotalPrice == 0) break;
                 }
